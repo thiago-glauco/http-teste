@@ -6,10 +6,16 @@ import { WebService } from './services/web.service';
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ]
 })
+
 export class AppComponent  {
+  leaders;
+
   name = 'Angular';
   constructor (private webService: WebService ) {
-    this.webService.getTable();
+    this.webService.getTable().subscribe(
+      result => (this.leaders = result),
+      error => console.dir(error)
+    );
   }
 
 }
